@@ -9,8 +9,7 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthController authController = Get.put(AuthController());
-    var emailController = TextEditingController();
-    var passwordController = TextEditingController();
+    final TextEditingController confirmPassword = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -48,7 +47,7 @@ class SignupScreen extends StatelessWidget {
                 height: 20,
               ),
               TextFormField(
-                controller: emailController,
+                controller: authController.emailController,
                 decoration: InputDecoration(
                   hintText: "Email",
                   fillColor: Colors.white,
@@ -68,7 +67,7 @@ class SignupScreen extends StatelessWidget {
                 height: 20,
               ),
               TextFormField(
-                controller: passwordController,
+                controller: authController.passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: "Password",
@@ -89,6 +88,7 @@ class SignupScreen extends StatelessWidget {
                 height: 20,
               ),
               TextFormField(
+                controller: confirmPassword,
                 decoration: InputDecoration(
                   hintText: "Confirm password",
                   fillColor: Colors.white,
@@ -109,8 +109,7 @@ class SignupScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  authController.instance.register(emailController.text.trim(),
-                      passwordController.text.trim());
+                  authController.singup();
                 },
                 child: const Padding(
                   padding: EdgeInsets.all(10.0),
