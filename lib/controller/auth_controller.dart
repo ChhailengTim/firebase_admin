@@ -1,12 +1,15 @@
+import 'package:firebase_admin/screen/admin_screen.dart';
 import 'package:firebase_admin/screen/login_screen.dart';
-import 'package:firebase_admin/screen/signup_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final displayName = '';
   //AuthController.instance...
-  final AuthController instance = Get.find();
+  //final AuthController instance = Get.find();
   //email, password, name...
   late Rx<User?> _user;
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -25,29 +28,61 @@ class AuthController extends GetxController {
       debugPrint("login page");
       Get.offAll(() => const LoginScreen());
     } else {
-      Get.offAll(() => const SignupScreen());
+      Get.offAll(() => AdminScreen(
+            email: user.email,
+          ));
     }
   }
 
-  void register(String email, password) async {
+  void singIn() async {
+    try {
+      await auth.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+    } catch (e) {
+      // Get.snackbar(
+      //   "About user",
+      //   "User message",
+      //   backgroundColor: Colors.redAccent,
+      //   snackPosition: SnackPosition.BOTTOM,
+      //   titleText: const Text(
+      //     "Account Sing in failed",
+      //     style: TextStyle(color: Colors.white),
+      //   ),
+      //   messageText: Text(
+      //     e.toString(),
+      //     style: const TextStyle(color: Colors.white),
+      //   ),
+      // );
+    }
+  }
+
+  void singup() async {
     try {
       await auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-    } catch (e) {
-      Get.snackbar(
-        "About user",
-        "User message",
-        backgroundColor: Colors.redAccent,
-        snackPosition: SnackPosition.BOTTOM,
-        titleText: const Text(
-          "Account creation failed",
-          style: TextStyle(color: Colors.white),
-        ),
-        messageText: Text(
-          e.toString(),
-          style: const TextStyle(color: Colors.white),
-        ),
+        email: emailController.text,
+        password: passwordController.text,
       );
+    } catch (e) {
+      // Get.snackbar(
+      //   "About user",
+      //   "User message",
+      //   backgroundColor: Colors.redAccent,
+      //   snackPosition: SnackPosition.BOTTOM,
+      //   titleText: const Text(
+      //     "Account creation failed",
+      //     style: TextStyle(color: Colors.white),
+      //   ),
+      //   messageText: Text(
+      //     e.toString(),
+      //     style: const TextStyle(color: Colors.white),
+      //   ),
+      // );
     }
+  }
+
+  void singout() async {
+    await auth.signOut();
   }
 }
