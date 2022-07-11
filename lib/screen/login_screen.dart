@@ -1,8 +1,22 @@
+import 'package:firebase_admin/controller/auth_controller.dart';
 import 'package:firebase_admin/screen/signup_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final AuthController authController = Get.put(AuthController());
+  @override
+  void initState() {
+    super.initState();
+    authController.singup();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +37,8 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              TextFormField(
+              TextField(
+                controller: authController.emailController,
                 decoration: InputDecoration(
                   hintText: "Email",
                   fillColor: Colors.white,
@@ -42,7 +57,8 @@ class LoginScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              TextFormField(
+              TextField(
+                controller: authController.passwordController,
                 decoration: InputDecoration(
                   hintText: "Password",
                   fillColor: Colors.white,
@@ -62,7 +78,9 @@ class LoginScreen extends StatelessWidget {
                 height: 20,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  authController.singIn();
+                },
                 child: const Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text(
