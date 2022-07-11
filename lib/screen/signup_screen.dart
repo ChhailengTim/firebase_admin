@@ -9,7 +9,6 @@ class SignupScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AuthController authController = Get.put(AuthController());
-    final TextEditingController confirmPassword = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -23,25 +22,6 @@ class SignupScreen extends StatelessWidget {
                     .textTheme
                     .titleLarge!
                     .copyWith(fontFamily: "FugazOne"),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: "Name",
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.black),
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
               ),
               const SizedBox(
                 height: 20,
@@ -71,26 +51,6 @@ class SignupScreen extends StatelessWidget {
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: "Password",
-                  fillColor: Colors.white,
-                  border: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.black),
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: confirmPassword,
-                decoration: InputDecoration(
-                  hintText: "Confirm password",
                   fillColor: Colors.white,
                   border: OutlineInputBorder(
                     borderSide: const BorderSide(color: Colors.black),
