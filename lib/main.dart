@@ -1,3 +1,4 @@
+import 'package:firebase_admin/controller/auth_controller.dart';
 import 'package:firebase_admin/screen/login_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -15,6 +16,9 @@ const _firebaseConfigWeb = FirebaseOptions(
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   kIsWeb ? await Firebase.initializeApp(options: _firebaseConfigWeb) : null;
+  await Firebase.initializeApp().then(
+    (value) => Get.put(AuthController()),
+  );
   runApp(const MyApp());
 }
 
