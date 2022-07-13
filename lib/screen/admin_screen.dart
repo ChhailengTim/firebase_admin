@@ -55,17 +55,17 @@ class AdminScreen extends StatelessWidget {
                             child: Column(
                               children: [
                                 Container(
-                                  height: 30,
-                                  width: 100,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                    vertical: 10,
+                                  ),
                                   decoration: BoxDecoration(
                                       color: Colors.red,
                                       borderRadius: BorderRadius.circular(25)),
-                                  child: Center(
-                                    child: Text(
-                                      '${data['discount']}%',
-                                      style: const TextStyle(
-                                          color: Colors.white, fontSize: 20),
-                                    ),
+                                  child: Text(
+                                    '${data['discount']}%',
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 20),
                                   ),
                                 ),
                                 const Icon(
